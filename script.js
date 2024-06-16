@@ -1,11 +1,16 @@
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
+const finishButton = document.getElementById('finish-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const resultElement = document.getElementById('result')
+const scoreContainerElement = document.getElementById('score-container')
+const scoreElement = document.getElementById('score')
+const restartButton = document.getElementById('restart-btn')
 
 let shuffledQuestions, currentQuestionIndex
+let correctAnswers = 0, totalQuestions = 0
 
 const questions = [
     {
@@ -105,9 +110,16 @@ nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
 })
+finishButton.addEventListener('click', showSummary)
+restartButton.addEventListener('click', startGame)
 
 function startGame() {
     startButton.classList.add('hide')
+    scoreContainerElement.classList.add('hide')
+    restartButton.classList.add('hide')
+    finishButton.classList.add('hide')
+    correctAnswers = 0
+    totalQuestions = 0
     shuffledQuestions = questions.sort(() => Math.random() - 0.5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
@@ -131,6 +143,7 @@ function showQuestion(question) {
         button.addEventListener('click', selectAnswer)
         answerButtonsElement.appendChild(button)
     })
+    finishButton.classList.remove('hide')
 }
 
 function resetState() {
@@ -149,14 +162,35 @@ function selectAnswer(e) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    resultElement.innerText = correct ? "Resposta correta!" : "Resposta errada!"
+    if (!correct) {
+        resultElement.innerHTML = `
+            Resposta errada! <br>
+            <img src="https://gifs.eco.br/wp-content/uploads/2022/09/gifs-do-faustao-6.gif" alt="Gif do Faustão">
+        `
+    } else {
+        resultElement.innerText = "Resposta correta!"
+    }
     resultElement.classList.remove('hide')
+    totalQuestions++
+    if (correct) correctAnswers++
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
-        startButton.innerText = 'Reiniciar'
-        startButton.classList.remove('hide')
+        finishButton.classList.remove('hide')
     }
+}
+
+function showSummary() {
+    questionContainerElement.classList.add('hide')
+    finishButton.classList.add('hide')
+    const percentageCorrect = Math.round((correctAnswers / totalQuestions) * 100)
+    scoreElement.innerHTML = `
+        <p>Você acertou ${correctAnswers} de ${totalQuestions} perguntas.</p>
+        <p>Percentual de acertos: ${percentageCorrect}%</p>
+        <p>Percentual de erros: ${100 - percentageCorrect}%</p>
+    `
+    scoreContainerElement.classList.remove('hide')
+    restartButton.classList.remove('hide')
 }
 
 function setStatusClass(element, correct) {
@@ -172,3 +206,4 @@ function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
+
