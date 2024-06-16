@@ -19,10 +19,13 @@ body {
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
+    background-color: #ffffff;
 }
 
-.btn:hover {
+.btn:hover, .btn:focus {
     background-color: #f0f0f0;
+    outline: none;
+    box-shadow: 0 0 0 2px #4caf50;
 }
 
 .btn-grid {
@@ -52,4 +55,9 @@ body {
 .wrong {
     background-color: #f44336;
     color: white;
+}
+
+#question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
 }
