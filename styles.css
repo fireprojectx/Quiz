@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('images/background.jpg'); /* Caminho da imagem */
+    background-image: url('https://github.com/fireprojectx/Quiz/blob/main/empty-picture-frame-surrounded-with-light-bulbs-yellow-background.jpg'); /* Caminho da imagem */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -14,7 +14,6 @@ body {
 .quiz-container {
     width: 300px;
     text-align: center;
-    background-image: url('https://github.com/fireprojectx/Quiz/blob/main/empty-picture-frame-surrounded-with-light-bulbs-yellow-background.jpg'); /* Caminho da imagem */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
