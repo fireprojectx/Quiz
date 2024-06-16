@@ -78,7 +78,11 @@ body {
     background-color: #4caf50;
     color: white;
 }
-
+#result img {
+    display: block;
+    margin: 10px auto;
+    max-width: 100%;
+}
 .wrong {
     background-color: #f44336;
     color: white;
