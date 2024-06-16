@@ -147,7 +147,6 @@ function showQuestion(question) {
 }
 
 function resetState() {
-    clearStatusClass(document.body)
     nextButton.classList.add('hide')
     resultElement.classList.add('hide')
     while (answerButtonsElement.firstChild) {
@@ -158,7 +157,7 @@ function resetState() {
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
-    setStatusClass(document.body, correct)
+    setStatusClass(selectedButton, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
@@ -206,4 +205,3 @@ function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
-
