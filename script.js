@@ -155,10 +155,7 @@ function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
     setStatusClass(document.body, correct)
-    Array.from(answerButtonsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct)
-    })
-    resultElement.innerTextLet's continue with the code to incorporate the functionality of counting correct answers and providing percentages of correct and incorrect responses.
+    Array.from(answerButtonsElement.children).forIt appears that the previous code response was cut off. Here is the complete and corrected JavaScript file to add the score tracking functionality:
 
 ### `script.js`
 ```javascript
