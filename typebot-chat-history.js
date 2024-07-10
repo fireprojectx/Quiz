@@ -6,17 +6,17 @@ function generatePDF() {
         
         let y = 10; // Posição inicial no eixo y
 
-        if (Array.isArray(chathistory)) {
+        if (Array.isArray(Chat_history)) {
             chathistory.forEach((message, index) => {
                 doc.text(10, y, `${message.sender}: ${message.text}`);
                 y += 10; // Incremento para a próxima linha
             });
 
             // Gera o PDF e faz o download
-            doc.save('chat_history.pdf');
+            doc.save('Chat_history.pdf');
             console.log('PDF gerado e baixado.');
         } else {
-            console.error('chathistory não é um array:', chathistory);
+            console.error('chathistory não é um array:', Chat_history);
         }
     } catch (error) {
         console.error('Erro ao gerar o PDF:', error);
