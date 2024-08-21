@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f7fc;
+            color: #3b3054;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 24px;
+        }
+
+        .weight-toggle {
+            display: inline-flex;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .weight-toggle button {
+            background-color: #e6e1f5;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            color: #3b3054;
+        }
+
+        .weight-toggle button.active {
+            background-color: #8a63d2;
+            color: white;
+        }
+
+        .weight-display {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #3b3054;
+        }
+
+        .imc-box {
+            border: 1px solid #e6e1f5;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: white;
+            text-align: left;
+            display: inline-block;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .imc-box p {
+            margin: 10px 0;
+        }
+
+        .imc-box .title {
+            font-weight: bold;
+        }
+
+        .btn-next {
+            background-color: #8a63d2;
+            border: none;
+            border-radius: 30px;
+            padding: 15px 30px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        .btn-next:hover {
+            background-color: #7149ac;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿Cuál es tu peso actual?</h1>
+
+    <div class="weight-toggle">
+        <button class="active" onclick="setUnit('kg')">kg</button>
+        <button onclick="setUnit('lb')">lb</button>
+    </div>
+
+    <div class="weight-display" id="weight-display">120 kg</div>
+
+    <div class="imc-box">
+        <p class="title">Tu IMC es de 46.87, lo que se considera sobrepeso</p>
+        <p>Mantente positiva y céntrate en una dieta equilibrada y el ejercicio.</p>
+        <p>Utilizaremos tu índice para personalizar tu plan efectivo de pérdida de peso.</p>
+    </div>
+
+    <button class="btn-next">Siguiente paso</button>
+
+    <script>
+        let weight = 120;
+        let unit = 'kg';
+
+        function setUnit(newUnit) {
+            unit = newUnit;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('weight-display').innerText = `${weight} ${unit}`;
+
+            // Opcional: se pode adicionar aqui o cálculo do IMC conforme a unidade selecionada.
+        }
+    </script>
+
+</body>
+</html>
