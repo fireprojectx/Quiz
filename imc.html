@@ -41,6 +41,24 @@
             color: white;
         }
 
+        .input-group {
+            margin: 20px 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
         .weight-display {
             font-size: 48px;
             margin: 20px 0;
@@ -92,31 +110,70 @@
         <button onclick="setUnit('lb')">lb</button>
     </div>
 
-    <div class="weight-display" id="weight-display">120 kg</div>
-
-    <div class="imc-box">
-        <p class="title">Tu IMC es de 46.87, lo que se considera sobrepeso</p>
-        <p>Mantente positiva y céntrate en una dieta equilibrada y el ejercicio.</p>
-        <p>Utilizaremos tu índice para personalizar tu plan efectivo de pérdida de peso.</p>
+    <div class="input-group">
+        <label for="weight">Peso (en <span id="weight-unit">kg</span>):</label>
+        <input type="number" id="weight" placeholder="120" value="120">
     </div>
 
-    <button class="btn-next">Siguiente paso</button>
+    <div class="input-group">
+        <label for="height">Altura (en metros):</label>
+        <input type="number" id="height" placeholder="1.75" value="1.75" step="0.01">
+    </div>
+
+    <button class="btn-next" onclick="calculateIMC()">Calcular IMC</button>
+
+    <div class="weight-display" id="weight-display">120 kg</div>
+
+    <div class="imc-box" id="imc-result">
+        <!-- O resultado do IMC será exibido aqui -->
+    </div>
 
     <script>
-        let weight = 120;
         let unit = 'kg';
 
         function setUnit(newUnit) {
             unit = newUnit;
+            document.getElementById('weight-unit').innerText = newUnit;
             updateDisplay();
         }
 
-        function updateDisplay() {
-            document.getElementById('weight-display').innerText = `${weight} ${unit}`;
+        function calculateIMC() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value);
+            let imc;
 
-            // Opcional: se pode adicionar aqui o cálculo do IMC conforme a unidade selecionada.
+            if (unit === 'lb') {
+                imc = (weight / 2.20462) / (height * height);
+            } else {
+                imc = weight / (height * height);
+            }
+
+            imc = imc.toFixed(2);
+            let resultText = `Tu IMC es de ${imc}, lo que se considera `;
+
+            if (imc < 18.5) {
+                resultText += "bajo peso.";
+            } else if (imc < 24.9) {
+                resultText += "normal.";
+            } else if (imc < 29.9) {
+                resultText += "sobrepeso.";
+            } else {
+                resultText += "obesidad.";
+            }
+
+            document.getElementById("imc-result").innerHTML = `
+                <p class="title">${resultText}</p>
+                <p>Mantente positiva y céntrate en una dieta equilibrada y el ejercicio.</p>
+                <p>Utilizaremos tu índice para personalizar tu plan efectivo de pérdida de peso.</p>
+            `;
+        }
+
+        function updateDisplay() {
+            const weight = document.getElementById('weight').value;
+            document.getElementById('weight-display').innerText = `${weight} ${unit}`;
         }
     </script>
 
 </body>
 </html>
+
